@@ -38,7 +38,7 @@ lazy_static::lazy_static! {
         RawNetworkMessage {
             magic: Bitcoin.magic(),
             payload: NetworkMessage::Version(VersionMessage::new(
-                ServiceFlags::NONE,
+                ServiceFlags::NODE_WITNESS,
                 SystemTime::now()
                     .duration_since(SystemTime::UNIX_EPOCH)
                     .unwrap()
@@ -281,7 +281,7 @@ async fn fetch_block_from_peer<'a>(
         conn = tokio::task::spawn_blocking(move || {
             RawNetworkMessage {
                 magic: Bitcoin.magic(),
-                payload: NetworkMessage::GetData(vec![Inventory::Block(hash)]),
+                payload: NetworkMessage::GetData(vec![Inventory::WitnessBlock(hash)]),
             }
             .consensus_encode(&mut *conn)
             .map_err(Error::from)
