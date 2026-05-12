@@ -38,7 +38,7 @@ lazy_static::lazy_static! {
         RawNetworkMessage {
             magic: Bitcoin.magic(),
             payload: NetworkMessage::Version(VersionMessage::new(
-                ServiceFlags::NODE_WITNESS,
+                ServiceFlags::WITNESS,
                 SystemTime::now()
                     .duration_since(SystemTime::UNIX_EPOCH)
                     .unwrap()
