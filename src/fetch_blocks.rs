@@ -281,7 +281,7 @@ async fn fetch_block_from_peer<'a>(
         conn = tokio::task::spawn_blocking(move || {
             RawNetworkMessage {
                 magic: Bitcoin.magic(),
-                payload: NetworkMessage::GetData(vec![Inventory::Block(hash)]),
+                payload: NetworkMessage::GetData(vec![Inventory::WitnessBlock(hash)]),
             }
             .consensus_encode(&mut *conn)
             .map_err(Error::from)
@@ -405,3 +405,4 @@ pub async fn fetch_block(
         }
     })
 }
+
